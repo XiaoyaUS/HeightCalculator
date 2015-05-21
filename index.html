@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Child's Height Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Child's Height Calculator">
+  <meta name="author" content="Xiaoya Zhu">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Child's Height Calculator</h1>
+    <h2>Using Galton's Dataset with Linear Regression Model</h2>
+    <p>Xiaoya Zhu<br/>Data Scientist</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Predicte Child&#39;s adult height using glaton dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Dataset used by Galton in 1885 to study the relationship between a parent&#39;s height and their childrens.</li>
+<li>A data frame with 928 observations on the following 2 variables.</li>
+<li>child = The child&#39;s height in inches</li>
+<li>parent = The “midparent” height in inches</li>
+<li>The midparent&#39;s height is an average of the fathers height and 1.08 times the mother&#39;s.</li>
+</ol>
+
+<pre><code class="r">dim(galton)
+</code></pre>
+
+<pre><code>## [1] 928   2
+</code></pre>
+
+<pre><code class="r">names(galton)
+</code></pre>
+
+<pre><code>## [1] &quot;child&quot;  &quot;parent&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Data Processing</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>1.User enter mother&#39;s height in inches.</p>
+
+<p>2.User enter father&#39;s height in inches.</p>
+
+<p>3.Create linear regression model.</p>
+
+<pre><code class="r">        mdLm &lt;- lm(child ~ parent, data=galton)
+</code></pre>
+
+<p>4.Calculate parent midparent&#39;s height from input value.</p>
+
+<pre><code>    mP &lt;- (input$fHeight + 1.08*input$mHeight)/2
+</code></pre>
+
+<p>5.Prediction of child&#39;s height with parent midparent&#39;s height.</p>
+
+<pre><code>    round(predict(mdLm,data.frame(parent = mP)),0)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Result Presentation</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>We use predicted child&#39;s height as boy&#39;s adult height.</li>
+<li>We use predicted child&#39;s height divided by 1.08 as Girl&#39;s adult height.</li>
+<li><p>Sunflower Plot of Galton Dataset with Linear Regression Li</p>
+
+<pre><code>sunflowerplot(galton$parent, galton$child, xlim=c(62,74), 
+ylim=c(62,74), xlab=&quot;Parent&#39; Height in inches&quot;, 
+ylab=&quot;Child&#39;s Height in inches&quot;,
+main=&quot;Sunflower Plot of Galton Dataset with Linear Regression Line&quot;)
+abline(mdLm)
+</code></pre></li>
+<li><p>Plot points with inputed midparent&#39;s height and predicted child&#39;s height.</p></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Galton Dataset with Linear Regression Line</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Predicte Child&#39;s adult height using glaton dataset'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Data Processing'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Result Presentation'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Galton Dataset with Linear Regression Line'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
