@@ -11,7 +11,7 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## Predicting child's adult height using dataset galton.
+## Predicting child's adult height using dataset galton
 
 1. Dataset galton used by Galton in 1885 to study the relationship between a parent's height and their children's height.
 2. A data frame with 928 observations on the following 2 variables.
